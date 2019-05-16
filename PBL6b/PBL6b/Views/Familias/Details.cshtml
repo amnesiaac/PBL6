@@ -1,0 +1,42 @@
+﻿@model PBL6b.Familia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Familia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sobrenome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sobrenome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Renda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Renda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Membro.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Membro.Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

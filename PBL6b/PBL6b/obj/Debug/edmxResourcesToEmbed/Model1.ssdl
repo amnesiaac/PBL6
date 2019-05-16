@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_pbl6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Emprego">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Empresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salario" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Familia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sobrenome" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MembroId" Type="int" Nullable="false" />
+    <Property Name="Renda" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Membro">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cpf" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Idade" Type="int" Nullable="false" />
+    <Property Name="Renda" Type="float" Nullable="false" />
+    <Property Name="Estuda" Type="bit" Nullable="false" />
+    <Property Name="EmpregoId" Type="int" />
+  </EntityType>
+  <Association Name="FK_Emprego">
+    <End Role="Emprego" Type="Self.Emprego" Multiplicity="0..1" />
+    <End Role="Membro" Type="Self.Membro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Emprego">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Membro">
+        <PropertyRef Name="EmpregoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Membro">
+    <End Role="Membro" Type="Self.Membro" Multiplicity="1" />
+    <End Role="Familia" Type="Self.Familia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Membro">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Familia">
+        <PropertyRef Name="MembroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_pbl6ModelStoreContainer">
+    <EntitySet Name="Emprego" EntityType="Self.Emprego" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Familia" EntityType="Self.Familia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Membro" EntityType="Self.Membro" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Emprego" Association="Self.FK_Emprego">
+      <End Role="Emprego" EntitySet="Emprego" />
+      <End Role="Membro" EntitySet="Membro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Membro" Association="Self.FK_Membro">
+      <End Role="Membro" EntitySet="Membro" />
+      <End Role="Familia" EntitySet="Familia" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

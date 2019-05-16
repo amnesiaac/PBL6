@@ -1,0 +1,48 @@
+﻿@model PBL6b.Familia
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Familia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sobrenome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sobrenome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Renda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Renda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Membro.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Membro.Nome)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

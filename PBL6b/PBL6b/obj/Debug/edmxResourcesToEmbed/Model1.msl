@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_pbl6ModelStoreContainer" CdmEntityContainer="db_pbl6Entities1">
+    <EntitySetMapping Name="Emprego">
+      <EntityTypeMapping TypeName="db_pbl6Model.Emprego">
+        <MappingFragment StoreEntitySet="Emprego">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="Salario" ColumnName="Salario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Familia">
+      <EntityTypeMapping TypeName="db_pbl6Model.Familia">
+        <MappingFragment StoreEntitySet="Familia">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
+          <ScalarProperty Name="MembroId" ColumnName="MembroId" />
+          <ScalarProperty Name="Renda" ColumnName="Renda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Membro">
+      <EntityTypeMapping TypeName="db_pbl6Model.Membro">
+        <MappingFragment StoreEntitySet="Membro">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+          <ScalarProperty Name="Idade" ColumnName="Idade" />
+          <ScalarProperty Name="Renda" ColumnName="Renda" />
+          <ScalarProperty Name="Estuda" ColumnName="Estuda" />
+          <ScalarProperty Name="EmpregoId" ColumnName="EmpregoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

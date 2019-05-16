@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_pbl6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Emprego">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Empresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salario" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Familia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sobrenome" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MembroId" Type="int" Nullable="false" />
+          <Property Name="Renda" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Membro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cpf" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Idade" Type="int" Nullable="false" />
+          <Property Name="Renda" Type="float" Nullable="false" />
+          <Property Name="Estuda" Type="bit" Nullable="false" />
+          <Property Name="EmpregoId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Emprego">
+          <End Role="Emprego" Type="Self.Emprego" Multiplicity="0..1" />
+          <End Role="Membro" Type="Self.Membro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emprego">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Membro">
+              <PropertyRef Name="EmpregoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Membro">
+          <End Role="Membro" Type="Self.Membro" Multiplicity="1" />
+          <End Role="Familia" Type="Self.Familia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membro">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Familia">
+              <PropertyRef Name="MembroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_pbl6ModelStoreContainer">
+          <EntitySet Name="Emprego" EntityType="Self.Emprego" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Familia" EntityType="Self.Familia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Membro" EntityType="Self.Membro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Emprego" Association="Self.FK_Emprego">
+            <End Role="Emprego" EntitySet="Emprego" />
+            <End Role="Membro" EntitySet="Membro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Membro" Association="Self.FK_Membro">
+            <End Role="Membro" EntitySet="Membro" />
+            <End Role="Familia" EntitySet="Familia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_pbl6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Emprego">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salario" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Membro" Relationship="Self.FK_Emprego" FromRole="Emprego" ToRole="Membro" />
+        </EntityType>
+        <EntityType Name="Familia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sobrenome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MembroId" Type="Int32" Nullable="false" />
+          <Property Name="Renda" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Membro" Relationship="Self.FK_Membro" FromRole="Familia" ToRole="Membro" />
+        </EntityType>
+        <EntityType Name="Membro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cpf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Idade" Type="Int32" Nullable="false" />
+          <Property Name="Renda" Type="Double" Nullable="false" />
+          <Property Name="Estuda" Type="Boolean" Nullable="false" />
+          <Property Name="EmpregoId" Type="Int32" />
+          <NavigationProperty Name="Emprego" Relationship="Self.FK_Emprego" FromRole="Membro" ToRole="Emprego" />
+          <NavigationProperty Name="Familia" Relationship="Self.FK_Membro" FromRole="Membro" ToRole="Familia" />
+        </EntityType>
+        <Association Name="FK_Emprego">
+          <End Role="Emprego" Type="Self.Emprego" Multiplicity="0..1" />
+          <End Role="Membro" Type="Self.Membro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emprego">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Membro">
+              <PropertyRef Name="EmpregoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Membro">
+          <End Role="Membro" Type="Self.Membro" Multiplicity="1" />
+          <End Role="Familia" Type="Self.Familia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membro">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Familia">
+              <PropertyRef Name="MembroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_pbl6Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Emprego" EntityType="Self.Emprego" />
+          <EntitySet Name="Familia" EntityType="Self.Familia" />
+          <EntitySet Name="Membro" EntityType="Self.Membro" />
+          <AssociationSet Name="FK_Emprego" Association="Self.FK_Emprego">
+            <End Role="Emprego" EntitySet="Emprego" />
+            <End Role="Membro" EntitySet="Membro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Membro" Association="Self.FK_Membro">
+            <End Role="Membro" EntitySet="Membro" />
+            <End Role="Familia" EntitySet="Familia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_pbl6ModelStoreContainer" CdmEntityContainer="db_pbl6Entities1">
+          <EntitySetMapping Name="Emprego">
+            <EntityTypeMapping TypeName="db_pbl6Model.Emprego">
+              <MappingFragment StoreEntitySet="Emprego">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Familia">
+            <EntityTypeMapping TypeName="db_pbl6Model.Familia">
+              <MappingFragment StoreEntitySet="Familia">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
+                <ScalarProperty Name="MembroId" ColumnName="MembroId" />
+                <ScalarProperty Name="Renda" ColumnName="Renda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Membro">
+            <EntityTypeMapping TypeName="db_pbl6Model.Membro">
+              <MappingFragment StoreEntitySet="Membro">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+                <ScalarProperty Name="Idade" ColumnName="Idade" />
+                <ScalarProperty Name="Renda" ColumnName="Renda" />
+                <ScalarProperty Name="Estuda" ColumnName="Estuda" />
+                <ScalarProperty Name="EmpregoId" ColumnName="EmpregoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

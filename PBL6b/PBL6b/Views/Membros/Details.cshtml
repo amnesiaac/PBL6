@@ -1,0 +1,66 @@
+﻿@model PBL6b.Membro
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Membro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cpf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cpf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Idade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Idade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Renda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Renda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estuda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estuda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emprego.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emprego.Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
